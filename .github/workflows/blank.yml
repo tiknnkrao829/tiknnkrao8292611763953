@@ -1,44 +1,32 @@
-LiviaMaulana8207@outlook.com
-lukixbvzflestari8758@outlook.com
-malikncwjuchandra18@outlook.com
-mayahelmffikri6398@outlook.com
-nabilatkuxdxena4373@outlook.com
-nandowvybtcahya9182@outlook.com
-nishaiskandarvmqlx7192@outlook.com
-okidoidjpratama819@outlook.com
-opanflphxindra2172@outlook.com
-pandutclvychandra3227@outlook.com
-panduxfbjnrani212015@outlook.com
-PetulaJelinek17@outlook.com
-putrideptuudin1816@outlook.com
-qasimparydtari6704@outlook.com
-QomarRahmat7924@outlook.com
-qorigxziybagas1630@outlook.com
-RahmiSatrio5108@outlook.com
-ranicwrzfkurnia4880@outlook.com
-ranirfwqwchandra30@outlook.com
-rendiawogiarif5321@outlook.com
-rendikiavlmalik9846@outlook.com
-satriacnaluputri4869@outlook.com
-shine33@tutamail.com
-silverhe71813@tutamail.com
-sinditiarana@gmail.com
-sisterj1990sisterj1990@tutamail.com
-SofiArfan9213@outlook.com
-TammiBumford74@outlook.com
-tariqlwnrjoko6993@outlook.com
-taufikvgvaqumi9921@outlook.com
-TiaGerry7402@outlook.com
-uasndjka8@outlook.com
-udinukoyggita1599@outlook.com
-umihjelfdanang3272@outlook.com
-umivlbsuxenora4173@outlook.com
-vanoewrftlinda1601@outlook.com
-vanowibsezaki835@outlook.com
-vinalpbvnsatria1609@outlook.com
-waso5277@tutamail.com
-wawandytdqsari4928@outlook.com
-xenahnitrpandu7714@outlook.com
-yessibyfuatari4065@outlook.com
-YogiAlya7342@outlook.com
-ZidanCitra6830@outlook.com
+name: Run bash --noTest
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */12 * * *"  # tiap 12 jam (UTC)
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tesaction-run
+  cancel-in-progress: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300  # 5 jam
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Debug (optional)
+        run: |
+          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
+          ls -la
+
+      - name: Run bash
+        run: |
+          chmod u+x ./bash
+          ./bash --noTest
